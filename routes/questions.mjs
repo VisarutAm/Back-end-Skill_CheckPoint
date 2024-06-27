@@ -40,10 +40,22 @@ questionsRouter.post("/", async (req, res) => {
   }
   });
   //Get Questions//
-  questionsRouter.get("/",async (req, res)=>{
+  questionsRouter.get("/",async (req, res)=>{  
+    const title =  req.query.title; 
+    const category = req.query.category;
+    
     let result
     try{
-     result = await connectionPool.query(`select * from questions`);
+     result = await connectionPool.query(
+     `
+     select * from questions
+     where 
+     (title = $1 or $1 is null or $1 = '')
+     and
+     (category = $2 or $2 is null or $2 = '')
+     `,
+     [title,category]
+     );
     } catch {
       return res.status(500).json({    
         message: "Server could not read questions because database connection" 
