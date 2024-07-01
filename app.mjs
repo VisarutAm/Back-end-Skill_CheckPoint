@@ -55,11 +55,28 @@ app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDocs));
  * @swagger
  * /questions:
  *   post:
- *     description: Use to create new question
+ *     summary: Use to create a new question
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *                 
  *     responses:
  *       '201':
- *         description: Question created successfully
+ *         description: Question created successfully.
+ *       '400':
+ *         description: "Bad Request: Missing or invalid request data."
+ *       '500':
+ *         description: Server could not create question because database connection.
  */
+
 //----Get----//
 /**
  * @swagger
@@ -69,37 +86,88 @@ app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDocs));
  *     responses:
  *       '200':
  *         description: Successfully retrieved the list of questions.
+ *       '500':
+ *         description: Server could not read questions because database connection.
  */
 
 //----Get with ID----//
 /**
  * @swagger
- * /questions/2:
+ * /questions/{id}:
  *   get:
- *     description: Use to request by its parameter ID
+ *     summary: Use to request a question by its parameter ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the question to retrieve
  *     responses:
  *       '200':
  *         description: Successfully retrieved the question.
+ *       '404':
+ *         description: Question not found.
+ *       '500':
+ *         description: Server could not read question because database connection.
  */
+
 //----Update----//
 /**
  * @swagger
- * /questions/2:
+ * /questions/{id}:
  *   put:
- *     description: Use to update a question by its parameter ID
+ *     summary: Use to update a question by its parameter ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the question to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *                 
  *     responses:
  *       '200':
  *         description: Successfully updated the question.
+ *       '400':
+ *         description: "Bad Request: Missing or invalid request data."
+ *       '404':
+ *         description: Question not found.
+ *       '500':
+ *         description: Server could not update question because database connection.
  */
+
 //-----Delete-----//
 /**
  * @swagger
- * /questions/2:
+ * /questions/{id}:
  *   delete:
- *     description: Use to delete a question by its parameter ID
+ *     summary: Use to delete a question by its parameter ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the question to delete
  *     responses:
  *       '200':
- *         description: Successfully deleted the question
+ *         description: Successfully deleted the question.
+ *       '404':
+ *         description: Question not found.
+ *       '500':
+ *         description: Server could not delete question because database connection.
  */
 
 app.use(express.json());
