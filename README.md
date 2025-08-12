@@ -1,2 +1,24 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/QXUFrH5k)
-# An Express Server Template
+# 📚 Questions Database API
+
+Created a CRUD API for managing questions data using **Node.js** and **PostgreSQL**.  
+Supports creating, retrieving, updating, and deleting records efficiently.
+
+## ✨ Features
+- **Create** new question entries
+- **Read** questions data
+- **Update** existing questions
+- **Delete** questions from the database
+
+## 🛠️ Tech Stack
+- **Node.js**
+- **PostgreSQL**
+
+## 📄 API Endpoints
+| Method | Endpoint        | Description            |
+|--------|----------------|------------------------|
+| POST   | `/questions`   | Create a new question  |
+| GET    | `/questions`   | Retrieve all questions |
+| GET    | `/questions/:id` | Retrieve question by ID |
+| PUT    | `/questions/:id` | Update a question by ID |
+| DELETE | `/questions/:id` | Delete a question by ID |
+
